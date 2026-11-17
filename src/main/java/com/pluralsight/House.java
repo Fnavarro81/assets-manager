@@ -22,8 +22,25 @@ public class House extends Asset{
 
         switch (condition) {
             case 1:
-                pricePerSquareFeet = 180.0
+                pricePerSquareFeet = 180.0;
+                break;
+            case 2:
+                pricePerSquareFeet = 130.0;
+                break;
+            case 3:
+                pricePerSquareFeet = 90.0;
+                break;
+            case 4:
+                pricePerSquareFeet = 80.0;
+                break;
+            default:
+                pricePerSquareFeet = 80;
+                break;
         }
+
+        BigDecimal buildingValue = BigDecimal.valueOf(pricePerSquareFeet).multiply(BigDecimal.valueOf(squareFoot));
+        BigDecimal lotValue = BigDecimal.valueOf(0.25).multiply(BigDecimal.valueOf(lotSize));
+        return buildingValue.add(lotValue);
     }
 
     public String getAddress() {
