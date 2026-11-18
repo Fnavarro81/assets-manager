@@ -35,7 +35,6 @@ public class Vehicle extends Asset {
                 depreciationRate = new BigDecimal("0.08").multiply(BigDecimal.valueOf(age));
             }
 
-// Cap depreciation at 100% (1.0)
             if (depreciationRate.compareTo(BigDecimal.ONE) > 0) {
                 depreciationRate = BigDecimal.ONE;
             }
