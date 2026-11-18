@@ -37,6 +37,8 @@ public class App {
                 2021,
                 45000.0));
 
+        assetList.add(new Cash("Apocalypse reserves", new BigDecimal("10000.00")));
+
         for (Asset asset : assetList) {
             System.out.println("Description   : " + asset.getDescription());
             System.out.println("Date Acquired : " + asset.getDateAcquired());
@@ -51,8 +53,13 @@ public class App {
                 Vehicle vehicle = (Vehicle) asset;
                 System.out.println("Vehicle       : " + vehicle.getYear() + " " + vehicle.getMakeModel());
             }
+            else if (asset instanceof Cash) {
+            System.out.println("Category      : Cash");
+            }
             System.out.println("------------------------------------------");
         }
+
+
 
     }
 
