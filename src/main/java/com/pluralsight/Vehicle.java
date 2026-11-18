@@ -25,21 +25,22 @@ public class Vehicle extends Asset {
         if (age > 10) {
             currentValue = new BigDecimal("1000.00");
         } else {
-            double depreciationPercent = 0.0;
+            BigDecimal depreciationRate;
 
             if (age <= 3) {
-                depreciationPercent = age * 0.03;
+                depreciationRate = new BigDecimal("0.03").multiply(BigDecimal.valueOf(age));
             } else if (age <= 6) {
-                depreciationPercent = (3 * 0.03) + ((age - 3) * 0.06);
+                depreciationRate = new BigDecimal("0.06").multiply(BigDecimal.valueOf(age));
             } else {
-                depreciationPercent = (3 * 0.03) + (3 * 0.06) + ((age - 6) * 0.08);
+                depreciationRate = new BigDecimal("0.08").multiply(BigDecimal.valueOf(age));
             }
 
-            if (depreciationPercent > 1.0) {
-                depreciationPercent = 1.0;
+// Cap depreciation at 100% (1.0)
+            if (depreciationRate.compareTo(BigDecimal.ONE) > 0) {
+                depreciationRate = BigDecimal.ONE;
             }
 
-            BigDecimal multiplier = BigDecimal.valueOf(1.0 - depreciationPercent);
+            BigDecimal multiplier = BigDecimal.ONE.subtract(depreciationRate);
             currentValue = getOriginalCost().multiply(multiplier);
         }
 
